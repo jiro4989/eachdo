@@ -4,16 +4,6 @@ eachdo
 
 |nimble-version| |nimble-install| |gh-actions|
 
-TODO
-
-This is a Nim project template.
-You must run command at first.
-
-.. code-block:: shell
-
-   nim c tool/setup.nim
-   tool/setup --author:<yourname> --appname:<application_name>
-
 This command replace and rename template strings of this repository.
 
 .. contents:: Table of contents
@@ -21,7 +11,35 @@ This command replace and rename template strings of this repository.
 Usage
 =====
 
-TODO
+.. code-block:: shell
+
+   $ eachdo / echo % / % 1 2 3
+   1
+   2
+   3
+
+   $ eachdo -- / useradd -m -d /home/USER USER / USER hello world foo bar
+   $ ls -d /home/*
+   /home/hello
+   /home/world
+   /home/foo
+   /home/bar
+
+   $ eachdo -- / echo FIRST LAST / FIRST taro hanako ichiro  / LAST yamada tanaka suzuki
+   taro yamada
+   hanako tanaka
+   ichiro suzuki
+
+   $ eachdo --matrix -- / echo FIRST LAST / FIRST taro hanako ichiro  / LAST yamada tanaka suzuki
+   taro yamada
+   taro tanaka
+   taro suzuki
+   hanako yamada
+   hanako tanaka
+   hanako suzuki
+   ichiro yamada
+   ichiro tanaka
+   ichiro suzuki
 
 Installation
 ============
