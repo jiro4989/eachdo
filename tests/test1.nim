@@ -1,6 +1,6 @@
 import unittest
 
-include APPNAME
+include eachdo
 
 suite "suite":
   test "test":
