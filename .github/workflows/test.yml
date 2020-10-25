@@ -2,7 +2,17 @@ name: test
 
 on:
   push:
+    paths-ignore:
+      - 'LICENSE'
+      - '*.rst'
+      - 'docs/*'
+      - '.gitignore'
   pull_request:
+    paths-ignore:
+      - 'LICENSE'
+      - '*.rst'
+      - 'docs/*'
+      - '.gitignore'
 
 env:
   NIM_VERSION: 'stable'
