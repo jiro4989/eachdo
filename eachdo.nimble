@@ -11,4 +11,5 @@ binDir        = "bin"
 
 # Dependencies
 
-requires "nim >= 1.2.4"
+requires "nim >= 1.4.0"
+requires "argparse >= 0.10.1"
