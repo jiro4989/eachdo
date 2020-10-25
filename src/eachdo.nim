@@ -32,18 +32,8 @@ proc matrixDo(cmd: string, tmpl: seq[string], argses: var seq[seq[string]], para
   matrixDo(cmd, tmpl, argses, params[1..^1])
   return
 
-proc main(args: seq[string]): int =
-  let args = parseArgs(args)
-  if args.version:
-    echo version
-    return
-
+proc defaultDo(args: Args) =
   let cmd = args.command[0]
-  if args.matrix:
-    var argses: seq[seq[string]]
-    matrixDo(cmd, args.command[1..^1], argses, args.params)
-    return
-
   let max = args.params[0].vars.len
   let cmds = args.command[1..^1]
   for i in 0..<max:
@@ -61,6 +51,19 @@ proc main(args: seq[string]): int =
     var p = startProcess(cmd, args = vs, options = {poUsePath, poParentStreams})
     discard p.waitForExit()
     close(p)
+
+proc main(args: seq[string]): int =
+  let args = parseArgs(args)
+  if args.version:
+    echo version
+    return
+
+  if args.matrix:
+    var argses: seq[seq[string]]
+    matrixDo(args.command[0], args.command[1..^1], argses, args.params)
+    return
+
+  defaultDo(args)
 
 when isMainModule and not defined modeTest:
   quit main(commandLineParams())
