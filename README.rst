@@ -2,6 +2,8 @@
 eachdo
 ====
 
+WIP
+
 |nimble-version| |nimble-install| |gh-actions|
 
 This command replace and rename template strings of this repository.
