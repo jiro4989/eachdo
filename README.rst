@@ -44,7 +44,13 @@ Usage
 Installation
 ============
 
-not yet
+.. code-block:: shell
+
+   $ nimble install eachdo
+
+or
+
+Download from `Releases <https://github.com/jiro4989/eachdo/releases>`_
 
 LICENSE
 =======
