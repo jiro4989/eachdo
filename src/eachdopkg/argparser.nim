@@ -3,41 +3,25 @@ from sequtils import delete
 import argparse
 
 const
-  helpDoc = """joyn joins lines of two files with a common characters, field or regular expression.
-
-Usage:
-  joyn [options...] -- <delimiter> <action> [args...] <delimiter> <action> [args...] <delimiter> <left_source_file> <right_source_file>
-
-Actions:
-  c, cut   character mode
-  g, grep  regular expression mode
-
-Options of actions:
-  grep
-    -g, --group <group>         named capturing group.
-    -d, --delimiter <delimiter> [default: " "]
-
-  cut
-    -c, --characters <characters>
-    -f, --field <field>
-    -d, --delimiter <delimiter>
+  helpDoc = """Usage:
+  eachdo [options...] -- <delimiter> <command> [args...] <delimiter> <REPLACE> [args...] [<delimiter> <REPLACE> [args...]]...
 
 Examples:
-  joyn -- / c -d , -f 3 / c -d " " -f 1 / tests/testdata/user.csv tests/testdata/hobby.txt
+  $ eachdo / echo % / % 1 2 3
+  1
+  2
+  3
 
-  joyn -o '1.1,1.2,2.2' -- / c -d , -f 3 / c -d " " -f 1 / tests/testdata/user.csv tests/testdata/hobby.txt
-
-  joyn -- / g '\s/([^/]+)/[^s]+\s' / c -d ',' -f 1 / tests/testdata/app.log tests/testdata/user2.csv
-
-  joyn -o '1.1,1.2,1.4,1.5,2.2,1.id' -- \
-    / g '\s/([^/]+)/[^s]+\s' -d ' ' -g '\s/(?P<id>[^/]+)/[^s]+\s' \
-    / c -d ',' -f 1 \
-    / tests/testdata/app.log tests/testdata/user2.csv
+  $ eachdo --matrix -- / echo FIRST LAST / FIRST taro hanako / LAST yamada tanaka 
+  taro yamada
+  taro tanaka
+  hanako yamada
+  hanako tanaka
 """
 
 type
   Args* = object
-    version*, matrix*: bool
+    help*, version*, matrix*: bool
     command*: seq[string]
     params*: seq[Param]
   Param* = object
@@ -85,14 +69,18 @@ proc parseArgs*(args: seq[string]): Args =
       break
     prefArgs.add(arg)
 
-  var p = newParser("eachdo"):
+  var p = newParser("eachdo executes commands with each multidimensional values."):
     help(helpDoc)
-    flag("-v", "--version")
-    flag("-m", "--matrix")
+    flag("-v", "--version", help = "Show version")
+    flag("-m", "--matrix", help = "Activate brute force combination mode")
 
   let opts = p.parse(prefArgs)
   if opts.version:
     result.version = opts.version
+    return
+
+  result.help = "-h" in prefArgs or "--help" in prefArgs
+  if result.help:
     return
 
   let cp = args[delimPos+1 .. ^1].parseCommandParam()

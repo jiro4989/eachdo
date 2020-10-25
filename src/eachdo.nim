@@ -57,6 +57,8 @@ proc main(args: seq[string]): int =
   if args.version:
     echo version
     return
+  if args.help:
+    return
 
   if args.matrix:
     var argses: seq[seq[string]]
