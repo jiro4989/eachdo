@@ -8,7 +8,7 @@ Copyright (c) 2020 jiro4989
 Released under the MIT License.
 https://github.com/jiro4989/""" & appName
 
-proc bruteForce(cmd: string, tmpl: seq[string], argses: var seq[seq[string]], params: seq[Param]) =
+proc matrixDo(cmd: string, tmpl: seq[string], argses: var seq[seq[string]], params: seq[Param]) =
   if params.len < 1:
     for args in argses:
       var p = startProcess(cmd, args = args, options = {poUsePath, poParentStreams})
@@ -29,7 +29,7 @@ proc bruteForce(cmd: string, tmpl: seq[string], argses: var seq[seq[string]], pa
         tmp.add(args.mapIt(it.replace(p.varName, val)))
     argses = tmp
 
-  bruteForce(cmd, tmpl, argses, params[1..^1])
+  matrixDo(cmd, tmpl, argses, params[1..^1])
   return
 
 proc main(args: seq[string]): int =
@@ -38,9 +38,11 @@ proc main(args: seq[string]): int =
     echo version
     return
 
-  let cmd = args.command[0]
-  var argses: seq[seq[string]]
-  bruteForce(cmd, args.command[1..^1], argses, args.params)
+  if args.matrix:
+    let cmd = args.command[0]
+    var argses: seq[seq[string]]
+    matrixDo(cmd, args.command[1..^1], argses, args.params)
+    return
 
 when isMainModule and not defined modeTest:
   quit main(commandLineParams())

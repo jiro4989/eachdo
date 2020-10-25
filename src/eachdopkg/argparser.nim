@@ -85,7 +85,7 @@ proc parseArgs*(args: seq[string]): Args =
       break
     prefArgs.add(arg)
 
-  var p = newParser("joyn"):
+  var p = newParser("eachdo"):
     help(helpDoc)
     flag("-v", "--version")
     flag("-m", "--matrix")
@@ -98,3 +98,4 @@ proc parseArgs*(args: seq[string]): Args =
   let cp = args[delimPos+1 .. ^1].parseCommandParam()
   result.command = cp[0]
   result.params = cp[1]
+  result.matrix = opts.matrix
