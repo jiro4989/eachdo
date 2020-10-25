@@ -38,11 +38,30 @@ proc main(args: seq[string]): int =
     echo version
     return
 
+  let cmd = args.command[0]
   if args.matrix:
-    let cmd = args.command[0]
     var argses: seq[seq[string]]
     matrixDo(cmd, args.command[1..^1], argses, args.params)
     return
+
+  let max = args.params[0].vars.len
+  echo max
+  let cmds = args.command[1..^1]
+  for i in 0..<max:
+    var vs: seq[string]
+    for j in 0..<cmds.len:
+      var tmpl = cmds[j]
+      for param in args.params:
+        let val =
+          if param.vars.len <= i:
+            ""
+          else:
+            param.vars[i]
+        tmpl = tmpl.replace(param.varName, val)
+      vs.add(tmpl)
+    var p = startProcess(cmd, args = vs, options = {poUsePath, poParentStreams})
+    discard p.waitForExit()
+    close(p)
 
 when isMainModule and not defined modeTest:
   quit main(commandLineParams())
