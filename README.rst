@@ -46,9 +46,7 @@ Usage
 Installation
 ============
 
-.. code-block:: shell
-
-   $ nimble install -Y eachdo
+not yet
 
 LICENSE
 =======
