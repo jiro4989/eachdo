@@ -2,11 +2,9 @@
 eachdo
 ====
 
-WIP
-
 |nimble-version| |nimble-install| |gh-actions|
 
-This command replace and rename template strings of this repository.
+eachdo executes commands with each multidimensional values.
 
 .. contents:: Table of contents
 
