@@ -45,7 +45,6 @@ proc main(args: seq[string]): int =
     return
 
   let max = args.params[0].vars.len
-  echo max
   let cmds = args.command[1..^1]
   for i in 0..<max:
     var vs: seq[string]
