@@ -2,7 +2,7 @@
 
 version       = "0.1.0"
 author        = "jiro4989"
-description   = "TODO"
+description   = "eachdo executes commands with each multidimensional values"
 license       = "MIT"
 srcDir        = "src"
 bin           = @["eachdo"]

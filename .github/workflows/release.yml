@@ -10,7 +10,7 @@ env:
   NIM_VERSION: 'stable'
   MAINTAINER: 'MAINTAINER'
   RELEASE_FILES: bin LICENSE README.*
-  DESC: 'TODO'
+  DESC: 'eachdo executes commands with each multidimensional values'
 
 jobs:
   build-artifact:
