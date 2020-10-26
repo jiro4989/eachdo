@@ -3,7 +3,7 @@ import eachdopkg/argparser
 
 const
   appName = "eachdo"
-  version = &"""{appName} command version 0.1.0
+  version = &"""{appName} command version 0.1.1
 Copyright (c) 2020 jiro4989
 Released under the MIT License.
 https://github.com/jiro4989/""" & appName
