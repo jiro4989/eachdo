@@ -3,7 +3,9 @@ from sequtils import delete
 import argparse
 
 const
-  helpDoc = """Usage:
+  helpDoc = """eachdo executes commands with each multidimensional values.
+
+Usage:
   eachdo [options...] -- <delimiter> <command> [args...] <delimiter> <REPLACE> [args...] [<delimiter> <REPLACE> [args...]]...
 
 Examples:
@@ -69,7 +71,7 @@ proc parseArgs*(args: seq[string]): Args =
       break
     prefArgs.add(arg)
 
-  var p = newParser("eachdo executes commands with each multidimensional values."):
+  var p = newParser("eachdo"):
     help(helpDoc)
     flag("-v", "--version", help = "Show version")
     flag("-m", "--matrix", help = "Activate brute force combination mode")
